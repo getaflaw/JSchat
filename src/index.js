@@ -12,7 +12,8 @@
 
  Другими словами: функция должна возвращать в неизменном виде то, что поступает ей на вход
  */
-function returnFirstArgument() {
+function returnFirstArgument(item) {
+    return item;
 }
 
 /*
@@ -30,6 +31,10 @@ function returnFirstArgument() {
    sumWithDefaults(10) вернет 110
  */
 function sumWithDefaults(a, b) {
+    if (b == undefined) {
+        b = 100;
+    }
+    return a + b;
 }
 
 /*
@@ -41,6 +46,7 @@ function sumWithDefaults(a, b) {
    returnFnResult(() => 'привет') вернет 'привет'
  */
 function returnFnResult(fn) {
+    return fn();
 }
 
 /*
@@ -56,8 +62,16 @@ function returnFnResult(fn) {
    console.log(f()); // выведет 12
    console.log(f()); // выведет 13
  */
+var chislo;
+
 function returnCounter(number) {
+    chislo = number;
+    return function f() {
+        chislo++;
+        return chislo;
+    };
 }
+
 
 /*
  Задание 5 *:
@@ -69,6 +83,12 @@ function returnCounter(number) {
    returnArgumentsArray(1, 2, 3) вернет [1, 2, 3]
  */
 function returnArgumentsArray() {
+    const Array = [];
+    for (let i = 0; i < arguments.length; i++) {
+
+        Array.push(arguments[i]);
+    }
+    return Array;
 }
 
 /*
@@ -86,7 +106,22 @@ function returnArgumentsArray() {
 
    console.log(newSum()) выведет 6
  */
+var sum;
+var xd;
+var ray;
+
 function bindFunction(fn) {
+    ray = [];
+    for (let i = 1; i < arguments.length; i++) {
+        ray.push(arguments[i]);
+    }
+    return function sum() {
+        xd = 0;
+        for (let i = 0; i < ray.length; i++) {
+            xd = xd + ray[i];
+        }
+        return xd;
+    }
 }
 
 export {
