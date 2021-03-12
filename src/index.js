@@ -30,10 +30,7 @@ function returnFirstArgument(item) {
  Пример:
    sumWithDefaults(10) вернет 110
  */
-function sumWithDefaults(a, b) {
-    if (b == undefined) {
-        b = 100;
-    }
+function sumWithDefaults(a, b = 100) {
     return a + b;
 }
 
@@ -64,7 +61,7 @@ function returnFnResult(fn) {
  */
 var chislo;
 
-function returnCounter(number) {
+function returnCounter(number = 0) {
     chislo = number;
     return function f() {
         chislo++;
@@ -110,11 +107,7 @@ var sum;
 var xd;
 var ray;
 
-function bindFunction(fn) {
-    ray = [];
-    for (let i = 1; i < arguments.length; i++) {
-        ray.push(arguments[i]);
-    }
+function bindFunction(fn, ...ray) {
     return function sum() {
         xd = 0;
         for (let i = 0; i < ray.length; i++) {
