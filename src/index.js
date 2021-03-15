@@ -17,6 +17,14 @@
    isAllTrue([100, 2, 3, 4, 5], n => n < 10) // вернет false
  */
 function isAllTrue(array, fn) {
+    let boolean = true;
+    for (var n in array) {
+        fn(array[n]) == false ? boolean = false : true;
+    }
+    if (!Array.isArray(array) || array.length == 0) {
+        throw new Error('empty array');
+    }
+    return boolean;
 }
 
 /*
@@ -36,6 +44,14 @@ function isAllTrue(array, fn) {
    isSomeTrue([1, 2, 3, 4, 5], n => n > 20) // вернет false
  */
 function isSomeTrue(array, fn) {
+    let boolean = false;
+    for (var n in array) {
+        fn(array[n]) == true ? boolean = true : false;
+    }
+    if (!Array.isArray(array) || array.length == 0) {
+        throw new Error('empty array');
+    }
+    return boolean;
 }
 
 /*
@@ -50,6 +66,21 @@ function isSomeTrue(array, fn) {
    - fn не является функцией (с текстом "fn is not a function")
  */
 function returnBadArguments(fn) {
+    let newArray = [];
+
+    if (typeof fn != "function") {
+        throw new Error('fn is not a function');
+    }
+    for (var i = 1; i < arguments.length; i++) {
+        try {
+            fn(arguments[i]);
+        } catch (err) {
+
+            newArray.push(arguments[i]);
+
+        }
+    }
+    return newArray;
 }
 
 /*
@@ -69,7 +100,44 @@ function returnBadArguments(fn) {
    - number не является числом (с текстом "number is not a number")
    - какой-либо из аргументов div является нулем (с текстом "division by 0")
  */
-function calculator() {
+function calculator(number = 0) {
+    if (typeof number != "number") {
+        throw new Error('number is not a number');
+    }
+    var obj = {
+        sum: (...arg) => {
+            let total = number;
+            for (var i = 0; i < arg.length; i++) {
+                total += arg[i];
+            }
+            return total;
+        },
+        dif: (...arg) => {
+            let total = number;
+            for (var i = 0; i < arg.length; i++) {
+                total -= arg[i];
+            }
+            return total;
+        },
+        div: (...arg) => {
+            let total = number;
+            for (var i = 0; i < arg.length; i++) {
+                total /= arg[i];
+                if (arg[i] == 0) {
+                    throw new Error('division by 0');
+                }
+            }
+            return total;
+        },
+        mul: (...arg) => {
+            let total = number;
+            for (var i = 0; i < arg.length; i++) {
+                total *= arg[i];
+            }
+            return total;
+        },
+    };
+    return obj;
 }
 
 /* При решении задач, пострайтесь использовать отладчик */

@@ -30,15 +30,12 @@ describe('ДЗ 2 - работа с исключениями и отладчик�
         });
 
         it('должна выбросить исключение, если передан пустой массив', () => {
-            assert.throws(isAllTrue.bind(null, [], () => {
-            }), 'empty array');
+            assert.throws(isAllTrue.bind(null, [], () => {}), 'empty array');
         });
 
         it('должна выбросить исключение, если передан не массив', () => {
-            assert.throws(isAllTrue.bind(null,':(', () => {
-            }), 'empty array');
-            assert.throws(isAllTrue.bind(null, {}, () => {
-            }), 'empty array');
+            assert.throws(isAllTrue.bind(null, ':(', () => {}), 'empty array');
+            assert.throws(isAllTrue.bind(null, {}, () => {}), 'empty array');
         });
 
         it('должна выбросить исключение, если fn не функция', () => {
@@ -64,13 +61,11 @@ describe('ДЗ 2 - работа с исключениями и отладчик�
         });
 
         it('должна выбросить исключение, если передан пустой массив', () => {
-            assert.throws(isSomeTrue.bind(null, [], () => {
-            }), 'empty array');
+            assert.throws(isSomeTrue.bind(null, [], () => {}), 'empty array');
         });
 
         it('должна выбросить исключение, если передан не массив', () => {
-            assert.throws(isSomeTrue.bind(null, ':(', () => {
-            }), 'empty array');
+            assert.throws(isSomeTrue.bind(null, ':(', () => {}), 'empty array');
             assert.throws(isSomeTrue.bind(null, {}), 'empty array');
         });
 
