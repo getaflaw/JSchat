@@ -27,6 +27,37 @@ const homeworkContainer = document.querySelector('#homework-container');
    homeworkContainer.appendChild(newDiv);
  */
 function createDiv() {
+    let newDiv = document.createElement('div');
+    newDiv.classList.add('draggable-div');
+
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
+
+    let rndColor = getRandomColor();
+    let rndWidth = getRandomInt(50, 100) + "px";
+    let rndHeight = getRandomInt(50, 100) + "px";
+    let rndXpos = getRandomInt(0, 100) + "%";
+    let rndYpox = getRandomInt(0, 100) + "%";
+
+    newDiv.style.backgroundColor = rndColor;
+    newDiv.style.width = rndWidth;
+    newDiv.style.height = rndHeight;
+    newDiv.style.top = rndXpos;
+    newDiv.style.left = rndYpox;
+
+    return newDiv;
 }
 
 /*
@@ -38,6 +69,26 @@ function createDiv() {
    addListeners(newDiv);
  */
 function addListeners(target) {
+    target.onmousedown = function(event) {
+        moveAt(event.PageX, event.PageY);
+
+        function moveAt(pageX, pageY) {
+            newNEWdiv.style.left = pageX - newNEWdiv.offsetWidth / 2 + "px";
+            newNEWdiv.style.top = pageY - newNEWdiv.offsetHeight / 2 + "px";
+        }
+
+        function onMouseMove(event) {
+            moveAt(event.pageX, event.pageY);
+        }
+        document.addEventListener('mousemove', onMouseMove);
+        target.onmouseup = function() {
+            document.removeEventListener('mousemove', onMouseMove);
+            target.onmouseup = null;
+        };
+        target.ondragstart = function() {
+            return false;
+        };
+    }
 }
 
 let addDivButton = homeworkContainer.querySelector('#addDiv');
